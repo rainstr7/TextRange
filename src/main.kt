@@ -35,9 +35,9 @@ fun findMarkerIgnoringSpace(text: String, marker: String): TextRange?
 
     if  (len_text < len_mark || text.length == 0 || marker.length == 0) //проверка на пустоту и не соответствние размера
         return null
-    if (only_space(text) == 0 || only_space(marker) == 0) //проверяем не состоит ли файл из пробелов
+    if (only_space(text) == 0 || only_space(marker) == 0)               //проверяем не состоит ли файл из пробелов
         return null
-    while (len_text >= 0 && len_mark >=0) //запуск анализа строк
+    while (len_text >= 0 && len_mark >=0)                               //запуск анализа строк
     {
 
         while (is_space(text[len_text]) == 1 && is_space(marker[len_mark]) == 0) // проверка случайно поставленных пробелов
@@ -50,16 +50,16 @@ fun findMarkerIgnoringSpace(text: String, marker: String): TextRange?
         if (text[len_text] == marker[len_mark] && is_space(text[len_text]) == 0 && (is_space(marker[len_mark]) == 0)) //нашли первое совпадение (не пробел)
         {
             len_text2 = len_text
-            end_r = len_text2                                       // заминаем позицию первого совпадения
+            end_r = len_text2                                       // запоминаем позицию первого совпадения
             if (len_mark == 0)
                 return (TextRange(len_text2, end_r + forgot_space)) // если один симвл в строке маркер marker выходим
             len_text2 -= 1                                          // если нет то двигаемся дальше
             len_mark -= 1
-            while (len_text2 >= 0 && len_mark >=0)                  //цикл для проверки целостности вхождения
+            while (len_text2 >= 0 && len_mark >=0)                  // цикл для проверки целостности вхождения
             {
-                while (is_space(text[len_text2]) == 1)               //цпроверка случайно поставленных пробелов
+                while (is_space(text[len_text2]) == 1)              // проверка случайно поставленных пробелов
                     len_text2--
-                while (is_space(marker[len_mark]) == 1)              //проверка пробелов которые забыли поставить (считаем забытые пробелы)
+                while (is_space(marker[len_mark]) == 1)             // проверка пробелов которые забыли поставить (считаем забытые пробелы)
                 {
                     len_mark -= 1
                     forgot_space += 1
